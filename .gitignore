@@ -1,0 +1,15 @@
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+# Ignore all the .iml files and the .idea folder, except the .idea/libraries folder
+# which is used to store the project-specific libraries
+!.idea/libraries/
+
+### Compiled class files ###
+*.class
+
+target
