@@ -33,6 +33,12 @@ public class VacancyController {
         return "vacancies/list";
     }
 
+    @GetMapping("/create")
+    public String getCreationPage(Model model) {
+        model.addAttribute("cities", cityService.findAll());
+        return "vacancies/create";
+    }
+
     @PostMapping("/create")
     public String create(@ModelAttribute Vacancy vacancy,
                          @RequestParam(required = false) MultipartFile file,
@@ -48,12 +54,6 @@ public class VacancyController {
             model.addAttribute("message", exception.getMessage());
             return "errors/404";
         }
-    }
-
-    @GetMapping("/create")
-    public String getCreationPage(Model model) {
-        model.addAttribute("cities", cityService.findAll());
-        return "vacancies/create";
     }
 
     @GetMapping("/{id}")
