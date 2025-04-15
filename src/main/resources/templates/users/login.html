@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:include="~{fragments/header :: header}"></head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Job4jDreamJob</a>
+        <div class="collapse navbar-collapse">
+            <div class="navbar-nav me-auto">
+                <a class="nav-item nav-link" href="/">Главная</a>
+                <a class="nav-item nav-link" th:href="@{/vacancies}">Вакансии</a>
+                <a class="nav-item nav-link" th:href="@{/candidates}">Кандидаты</a>
+            </div>
+            <div class="d-flex">
+                <a class="nav-link text-primary" th:href="@{/users/register}">Регистрация</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <form th:action="@{/users/login}" method="post">
+        <div class="mb-3">
+            <label for="email" class="form-label"><b>Почта</b></label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label"><b>Пароль</b></label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Войти</button>
+        <div th:if="${param.error}" class="alert alert-danger mt-3">
+            Неверная почта или пароль!
+        </div>
+    </form>
+</div>
+
+<footer th:include="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

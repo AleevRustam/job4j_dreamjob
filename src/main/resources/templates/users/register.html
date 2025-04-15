@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head th:include="fragments/header :: header"></head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -19,29 +19,22 @@
         </div>
     </div>
 </nav>
-<div class="container">
-    <div class="row">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Имя</th>
-                <th scope="col">Дата создания</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="candidate: ${candidates}">
-                <td th:text="${candidate.id}" />
-                <td>
-                    <a th:text="${candidate.name}"
-                       th:href="@{/candidates/{candidateId}(candidateId=${candidate.id})}">
-                    </a>
-                </td>
-                <td th:text="${candidate.creationDate}" />
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="container mt-4">  <!-- Тот же container, что и в навигации -->
+    <form th:action="@{/users/register}" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label"><b>Имя</b></label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Иван" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label"><b>Почта</b></label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="ivan@mail.ru" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label"><b>Пароль</b></label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
 </body>
