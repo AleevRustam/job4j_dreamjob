@@ -3,14 +3,12 @@ package ru.job4j.dreamjob.repository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.sql2o.Sql2oException;
 import ru.job4j.dreamjob.configuration.DatasourceConfiguration;
 import ru.job4j.dreamjob.model.User;
 import org.sql2o.Sql2o;
 
 import java.util.Properties;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class Sql2oUserRepositoryTest {
@@ -58,9 +56,9 @@ class Sql2oUserRepositoryTest {
         var user1 = new User(0, "duplicate@mail.ru", "Ivan", "pass1");
         var user2 = new User(0, "duplicate@mail.ru", "Petr", "pass2");
         var savedUser1 = sql2oUserRepository.save(user1);
+        var savedUser2 = sql2oUserRepository.save(user2);
         assertThat(savedUser1).isPresent();
-        assertThatThrownBy(() -> sql2oUserRepository.save(user2))
-                .isInstanceOf(Sql2oException.class);
+        assertThat(savedUser2).isEmpty();
     }
 
     @Test

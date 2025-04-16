@@ -26,6 +26,9 @@ public class Sql2oUserRepository implements UserRepository {
             int generatedId = query.executeUpdate().getKey(Integer.class);
             user.setId(generatedId);
             return Optional.of(user);
+        } catch (Exception e) {
+            System.out.println("User don't saved");
+            return Optional.empty();
         }
     }
 
@@ -38,6 +41,9 @@ public class Sql2oUserRepository implements UserRepository {
                     .addParameter("password", password);
             var user = query.setColumnMappings(User.COLUMN_MAPPING).executeAndFetchFirst(User.class);
             return Optional.ofNullable(user);
+        } catch (Exception e) {
+            System.out.println("User don't found");
+            return Optional.empty();
         }
     }
 }
