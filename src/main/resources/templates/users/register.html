@@ -2,8 +2,8 @@
 <html lang="en">
 <head th:include="fragments/header :: header"></head>
 <body>
-<div th:replace="fragments/header :: navbar"></div>
-<div class="container mt-4">  <!-- Тот же container, что и в навигации -->
+<div th:replace="fragments/header :: nav(${user})"></div>
+<div class="container mt-4">
     <form th:action="@{/users/register}" method="post">
         <div class="mb-3">
             <label for="name" class="form-label"><b>Имя</b></label>

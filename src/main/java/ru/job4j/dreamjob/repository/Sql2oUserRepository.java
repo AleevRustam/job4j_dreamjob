@@ -44,7 +44,7 @@ public class Sql2oUserRepository implements UserRepository {
             var user = query.setColumnMappings(User.COLUMN_MAPPING).executeAndFetchFirst(User.class);
             result = Optional.ofNullable(user);
         } catch (Exception e) {
-            System.out.println("User don't found");
+            System.out.println("User not found");
         }
         return result;
     }
