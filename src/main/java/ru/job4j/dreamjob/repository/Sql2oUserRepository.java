@@ -3,6 +3,8 @@ package ru.job4j.dreamjob.repository;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
 import ru.job4j.dreamjob.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
@@ -10,6 +12,7 @@ import java.util.Optional;
 public class Sql2oUserRepository implements UserRepository {
 
     private final Sql2o sql2o;
+    private static final Logger LOGGER = LoggerFactory.getLogger(Sql2oUserRepository.class);
 
     public Sql2oUserRepository(Sql2o sql2o) {
         this.sql2o = sql2o;
@@ -28,7 +31,7 @@ public class Sql2oUserRepository implements UserRepository {
             user.setId(generatedId);
             result = Optional.of(user);
         } catch (Exception e) {
-            System.out.println("User don't saved");
+           LOGGER.warn("User don't saved");
         }
         return result;
     }
@@ -44,7 +47,7 @@ public class Sql2oUserRepository implements UserRepository {
             var user = query.setColumnMappings(User.COLUMN_MAPPING).executeAndFetchFirst(User.class);
             result = Optional.ofNullable(user);
         } catch (Exception e) {
-            System.out.println("User not found");
+            LOGGER.warn("User not found");
         }
         return result;
     }
