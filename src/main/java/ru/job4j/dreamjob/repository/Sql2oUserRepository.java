@@ -31,7 +31,7 @@ public class Sql2oUserRepository implements UserRepository {
             user.setId(generatedId);
             result = Optional.of(user);
         } catch (Exception e) {
-           LOGGER.warn("User don't saved");
+           LOGGER.error(e.getMessage(), e);
         }
         return result;
     }
@@ -47,7 +47,7 @@ public class Sql2oUserRepository implements UserRepository {
             var user = query.setColumnMappings(User.COLUMN_MAPPING).executeAndFetchFirst(User.class);
             result = Optional.ofNullable(user);
         } catch (Exception e) {
-            LOGGER.warn("User not found");
+            LOGGER.error(e.getMessage(), e);
         }
         return result;
     }
